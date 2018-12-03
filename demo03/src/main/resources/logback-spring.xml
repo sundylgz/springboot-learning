@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <jmxConfigurator/>
+    <!--日志存放路径-->
+    <property name="log.home" value="/data/logs"/>
+    <property name="app.name" value="springboot-demo03"/>
+
+    <!-- 开发环境 -->
+    <springProfile name="dev">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:-} --- [%15.15t] %-40.40logger{39}%L : %m%n</pattern>
+                <charset class="java.nio.charset.Charset">UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="fat">
+        <appender name="FatAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.home}/${app.name}-fat.log</file>
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                <fileNamePattern>${log.home}/${app.name}-fat.%i.log
+                </fileNamePattern>
+                <minIndex>1</minIndex>
+                <maxIndex>20</maxIndex>
+            </rollingPolicy>
+            <triggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                <maxFileSize>1024MB</maxFileSize>
+            </triggeringPolicy>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:-} --- [%15.15t] %-40.40logger{39}%L : %m%n</pattern>
+                <charset class="java.nio.charset.Charset">UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <root level="warn">
+            <appender-ref ref="FatAppender"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="uat">
+        <appender name="UatAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.home}/${app.name}-uat.log</file>
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                <fileNamePattern>${log.home}/${app.name}-uat.%i.log
+                </fileNamePattern>
+                <minIndex>1</minIndex>
+                <maxIndex>20</maxIndex>
+            </rollingPolicy>
+            <triggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                <maxFileSize>1024MB</maxFileSize>
+            </triggeringPolicy>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:-} --- [%15.15t] %-40.40logger{39}%L : %m%n</pattern>
+                <charset class="java.nio.charset.Charset">UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="UatAppender"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="pro">
+        <appender name="ProAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.home}/${app.name}-pro.log</file>
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                <fileNamePattern>${log.home}/${app.name}-pro.%i.log
+                </fileNamePattern>
+                <minIndex>1</minIndex>
+                <maxIndex>20</maxIndex>
+            </rollingPolicy>
+            <triggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                <maxFileSize>1024MB</maxFileSize>
+            </triggeringPolicy>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:-} --- [%15.15t] %-40.40logger{39}%L : %m%n</pattern>
+                <charset class="java.nio.charset.Charset">UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <root level="warn">
+            <appender-ref ref="ProAppender"/>
+        </root>
+
+    </springProfile>
+
+</configuration>

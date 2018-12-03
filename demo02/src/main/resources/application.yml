@@ -1,0 +1,31 @@
+server:
+  port: 80
+
+person:
+  ##lastName: zhangsan
+  last-name: zhangsan
+  age: 18
+  boss: false
+  birth: 2017/12/23
+  maps: {k1: v1,k2: v2}
+  lists:
+    -lisi
+    -zhangsan
+  dog:
+    name: 小狗
+    age: 8
+
+
+person2:
+  ##lastName: zhangsan
+  last-name: admin@qq.com
+  age: 18
+  boss: false
+  birth: 2017/12/23
+  maps: {k1: v1,k2: v2}
+  lists:
+    -lisi
+    -zhangsan
+  dog:
+    name: 小狗
+    age: 8
